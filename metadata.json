@@ -1,0 +1,19 @@
+{
+  "name": "RUNFlix Entertainment",
+  "description": "A modern movies, TV series and anime discovery platform. Browse trending movies, search titles, view detailed metadata, explore TV seasons and episodes, and download available sources in multiple qualities with subtitle support.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "Movie and TV series and anime discovery",
+    "Trending content browsing",
+    "Real-time search with pagination",
+    "Detailed movie and series information",
+    "Season and episode navigation",
+    "Multi-quality download sources",
+    "Subtitle download support",
+    "Batch episode downloads",
+    "Responsive web experience",
+    "Fast API-powered content loading",
+    "React Query caching and optimization",
+    "Modern cinematic UI experience"
+  ]
+}

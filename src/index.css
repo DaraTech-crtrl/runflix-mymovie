@@ -1,0 +1,718 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+/* ============================================
+   RUNFLIX PREMIUM DESIGN SYSTEM
+   ============================================ */
+
+:root {
+  /* Core Palette */
+  --rf-black: #030305;
+  --rf-surface: #07070a;
+  --rf-surface-2: #0e0e14;
+  --rf-surface-3: #14141d;
+  --rf-border: rgba(255, 255, 255, 0.05);
+  --rf-border-hover: rgba(255, 255, 255, 0.12);
+
+  /* Brand */
+  --rf-red: #ff1e27;
+  --rf-red-glow: rgba(255, 30, 39, 0.35);
+  --rf-red-deep: #bf0b12;
+  --rf-gold: #fbc531;
+  --rf-gold-glow: rgba(251, 197, 49, 0.18);
+
+  /* Glass */
+  --rf-glass: rgba(255, 255, 255, 0.02);
+  --rf-glass-2: rgba(255, 255, 255, 0.04);
+  --rf-glass-3: rgba(255, 255, 255, 0.06);
+  --rf-glass-border: rgba(255, 255, 255, 0.06);
+
+  /* Typography */
+  --rf-text: #f5f5f7;
+  --rf-text-muted: #9ba0b0;
+  --rf-text-dim: #5c6275;
+
+  /* Spacing & Radius */
+  --rf-radius-sm: 8px;
+  --rf-radius-md: 14px;
+  --rf-radius-lg: 20px;
+  --rf-radius-xl: 24px;
+  --rf-radius-2xl: 32px;
+  --rf-radius-full: 9999px;
+
+  /* Shadows */
+  --rf-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --rf-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --rf-shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.6);
+  --rf-shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.7);
+  --rf-shadow-glow: 0 0 50px rgba(255, 30, 39, 0.2);
+
+  /* Safe areas */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+
+  /* ── Anime Section Palette ── */
+  --rf-anime-pink: #ec4899;
+  --rf-anime-pink-glow: rgba(236, 72, 153, 0.25);
+  --rf-anime-fuchsia: #d946ef;
+  --rf-anime-purple: #9333ea;
+  --rf-anime-purple-glow: rgba(147, 51, 234, 0.2);
+  --rf-anime-gradient: linear-gradient(135deg, #ec4899, #d946ef, #9333ea);
+
+  /* ── Discord Brand ── */
+  --rf-discord: #5865F2;
+  --rf-discord-glow: rgba(88, 101, 242, 0.3);
+  --rf-discord-hover: #4752c4;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+  overflow-y: auto;
+}
+
+body {
+  background: var(--rf-black);
+  color: var(--rf-text);
+  font-family: "Outfit", "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  overflow-y: auto;
+  min-height: 100%;
+  color-scheme: dark;
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+}
+
+/* Reduce paint cost while scrolling long pages */
+main {
+  contain: layout style;
+}
+
+#root {
+  min-height: 100%;
+}
+
+/* Touch tweaks — mobile only (avoid breaking wheel scroll on desktop) */
+@media (hover: none) and (pointer: coarse) {
+  body {
+    overscroll-behavior-y: none;
+    touch-action: manipulation;
+  }
+}
+
+@supports (-webkit-touch-callout: none) {
+  html.standalone-app,
+  html.standalone-app body {
+    min-height: 100dvh;
+  }
+}
+
+/* PWA standalone: respect safe areas without trapping scroll */
+html.standalone-app #root {
+  min-height: 100dvh;
+  min-height: 100%;
+}
+
+html.standalone-app .mobile-nav {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+option {
+  background-color: var(--rf-surface-2) !important;
+  color: var(--rf-text) !important;
+}
+
+/* ============================================
+   FLOATING AMBIENT GLOW ANIMATIONS
+   ============================================ */
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(3%, 5%) scale(1.08);
+  }
+  66% {
+    transform: translate(-2%, -3%) scale(0.95);
+  }
+}
+
+@keyframes float-mid {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-5%, 4%) scale(1.1);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 22s ease-in-out infinite;
+}
+
+.animate-float-mid {
+  animation: float-mid 16s ease-in-out infinite;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(3, 3, 5, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 99px;
+  border: 2px solid var(--rf-black);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Hide scrollbar for horizontal carousels */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ============================================
+   GLASSMORPHISM
+   ============================================ */
+
+.glass {
+  background: var(--rf-glass);
+  backdrop-filter: blur(24px) saturate(1.6);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  border: 1px solid var(--rf-glass-border);
+}
+
+.glass-2 {
+  background: var(--rf-glass-2);
+  backdrop-filter: blur(24px) saturate(1.5);
+  -webkit-backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid var(--rf-glass-border);
+}
+
+.glass-3 {
+  background: var(--rf-glass-3);
+  backdrop-filter: blur(32px) saturate(1.6);
+  -webkit-backdrop-filter: blur(32px) saturate(1.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(24px) saturate(1.3);
+  -webkit-backdrop-filter: blur(24px) saturate(1.3);
+  border: 1px solid var(--rf-border);
+}
+
+/* ============================================
+   SKELETON LOADER
+   ============================================ */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--rf-glass-2);
+  border-radius: var(--rf-radius-md);
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 100%
+  );
+  animation: skeleton-shimmer 1.8s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* ============================================
+   ANIMATED GRADIENTS
+   ============================================ */
+
+.gradient-cinematic {
+  background: linear-gradient(
+    135deg,
+    var(--rf-black) 0%,
+    #0d0514 25%,
+    #0a0012 50%,
+    var(--rf-black) 100%
+  );
+}
+
+.gradient-hero {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(3, 3, 5, 0.2) 20%,
+    rgba(3, 3, 5, 0.6) 50%,
+    rgba(3, 3, 5, 0.9) 75%,
+    var(--rf-black) 100%
+  );
+}
+
+.gradient-hero-side {
+  background: linear-gradient(
+    to right,
+    var(--rf-black) 0%,
+    rgba(3, 3, 5, 0.8) 30%,
+    transparent 100%
+  );
+}
+
+.glow-red {
+  box-shadow: 0 0 30px rgba(229, 9, 20, 0.25),
+              0 0 60px rgba(229, 9, 20, 0.1),
+              inset 0 0 20px rgba(229, 9, 20, 0.05);
+}
+
+.glow-gold {
+  box-shadow: 0 0 20px rgba(245, 197, 24, 0.2),
+              0 0 40px rgba(245, 197, 24, 0.05);
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+
+.movie-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--rf-radius-lg);
+  border: 1px solid var(--rf-border);
+  background: var(--rf-glass);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.movie-card:hover {
+  border-color: rgba(229, 9, 20, 0.3);
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5),
+              0 0 30px rgba(229, 9, 20, 0.08);
+}
+
+.movie-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center bottom,
+    rgba(229, 9, 20, 0.08) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.movie-card:hover::before {
+  opacity: 1;
+}
+
+/* ============================================
+   BADGE STYLES
+   ============================================ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  border-radius: var(--rf-radius-full);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.badge-rating {
+  background: var(--rf-gold-glow);
+  color: var(--rf-gold);
+  border: 1px solid rgba(245, 197, 24, 0.2);
+}
+
+.badge-quality {
+  background: rgba(229, 9, 20, 0.15);
+  color: #ff4757;
+  border: 1px solid rgba(229, 9, 20, 0.2);
+}
+
+.badge-type {
+  background: var(--rf-glass-2);
+  color: var(--rf-text-muted);
+  border: 1px solid var(--rf-border);
+}
+
+.badge-new {
+  background: linear-gradient(135deg, #00b894, #00cec9);
+  color: white;
+  border: none;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--rf-red) 0%, var(--rf-red-deep) 100%);
+  color: white;
+  font-weight: 700;
+  border-radius: var(--rf-radius-xl);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(229, 9, 20, 0.4),
+              0 0 60px rgba(229, 9, 20, 0.1);
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.btn-glass {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--rf-glass-2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  color: white;
+  font-weight: 600;
+  border-radius: var(--rf-radius-xl);
+  border: 1px solid var(--rf-glass-border);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-glass:hover {
+  background: var(--rf-glass-3);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+.btn-glass:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* ============================================
+   PAGE TRANSITIONS
+   ============================================ */
+
+.page-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.page-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   SNAP SCROLL
+   ============================================ */
+
+.snap-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  gap: 16px;
+  padding-bottom: 16px;
+}
+
+.snap-carousel > * {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   SELECTION
+   ============================================ */
+
+::selection {
+  background: var(--rf-red);
+  color: white;
+}
+
+/* ============================================
+   FLOATING NAV MOBILE 
+   ============================================ */
+
+.mobile-nav {
+  position: fixed;
+  bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  left: 14px;
+  right: 14px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: rgba(3, 3, 5, 0.65);
+  backdrop-filter: blur(32px) saturate(1.8);
+  -webkit-backdrop-filter: blur(32px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.85),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================
+   TOAST OVERRIDES
+   ============================================ */
+
+[data-sonner-toaster] {
+  --normal-bg: var(--rf-surface-2) !important;
+  --normal-text: var(--rf-text) !important;
+  --normal-border: var(--rf-border) !important;
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .movie-card:hover {
+    transform: none;
+  }
+}
+
+/* ============================================
+   FOCUS VISIBLE
+   ============================================ */
+
+:focus-visible {
+  outline: 2px solid var(--rf-red);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   IMAGE LOADING
+   ============================================ */
+
+.img-loading {
+  background: var(--rf-glass-2);
+  position: relative;
+  overflow: hidden;
+}
+
+.img-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.03),
+    transparent
+  );
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
+
+/* ============================================
+   RESPONSIVE HELPERS
+   ============================================ */
+
+@media (max-width: 768px) {
+  .mobile-full {
+    width: 100%;
+    border-radius: 0;
+  }
+}
+
+/* ============================================
+   ANIME SECTION UTILITIES
+   ============================================ */
+
+.glow-anime {
+  box-shadow:
+    0 0 30px rgba(236, 72, 153, 0.25),
+    0 0 60px rgba(147, 51, 234, 0.12),
+    inset 0 0 20px rgba(217, 70, 239, 0.05);
+}
+
+.glow-discord {
+  box-shadow:
+    0 0 24px rgba(88, 101, 242, 0.3),
+    0 0 48px rgba(88, 101, 242, 0.1);
+}
+
+/* Anime card hover (overrides red glow with pink/purple) */
+.anime-card .movie-card:hover {
+  border-color: rgba(236, 72, 153, 0.35);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(217, 70, 239, 0.12);
+}
+
+.anime-card .movie-card::before {
+  background: radial-gradient(
+    ellipse at center bottom,
+    rgba(217, 70, 239, 0.1) 0%,
+    transparent 70%
+  );
+}
+
+/* Discord button utility */
+.btn-discord {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--rf-discord);
+  color: white;
+  font-weight: 700;
+  border-radius: var(--rf-radius-xl);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+}
+
+.btn-discord:hover {
+  background: var(--rf-discord-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--rf-discord-glow);
+}
+
+.btn-discord:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Anime gradient text utility */
+.text-anime-gradient {
+  background: linear-gradient(135deg, #fff 30%, #f0abfc 60%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Anime section border accent */
+.border-anime {
+  border-color: rgba(217, 70, 239, 0.2);
+}
+
+/* Pulsing glow for the Discord live indicator */
+@keyframes discord-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4); }
+  50% { box-shadow: 0 0 0 6px rgba(74, 222, 128, 0); }
+}
+
+.discord-live {
+  animation: discord-pulse 2s ease-in-out infinite;
+}
+
+/* ============================================
+   PERFORMANCE CARD FADE-IN ANIMATIONS
+   ============================================ */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out both;
+}
+
+/* Defer off-screen card paint during scroll */
+.movie-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 175px 260px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-mid,
+  .animate-fade-in-up {
+    animation: none !important;
+  }
+}
+
+

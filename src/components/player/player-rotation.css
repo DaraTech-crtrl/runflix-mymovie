@@ -1,0 +1,232 @@
+/**
+ * RUNFlix player — container fullscreen + video rotation
+ * Fullscreen targets .rf-player-container so CSS transforms on <video> persist.
+ */
+
+.rf-player-container {
+  position: relative;
+  background: #000;
+}
+
+.rf-player-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.rf-player-video {
+  transform-origin: center center;
+  transition: transform 0.28s ease, width 0.28s ease, height 0.28s ease;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Inline (non-fullscreen) rotation */
+.rf-player-video[data-rotation='90'],
+.rf-player-video[data-rotation='270'] {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.rf-player-video[data-rotation='90'] {
+  transform: rotate(90deg);
+}
+
+.rf-player-video[data-rotation='180'] {
+  transform: rotate(180deg);
+}
+
+.rf-player-video[data-rotation='270'] {
+  transform: rotate(270deg);
+}
+
+/* Native fullscreen on the wrapper container */
+.rf-player-container:fullscreen,
+.rf-player-container:-webkit-full-screen {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.rf-player-container:fullscreen .rf-player-stage,
+.rf-player-container:-webkit-full-screen .rf-player-stage {
+  width: 100%;
+  height: 100%;
+}
+
+/* 90° / 270° — swap viewport axes so the image fits after rotation */
+.rf-player-container:fullscreen .rf-player-video[data-rotation='90'],
+.rf-player-container:fullscreen .rf-player-video[data-rotation='270'],
+.rf-player-container:-webkit-full-screen .rf-player-video[data-rotation='90'],
+.rf-player-container:-webkit-full-screen .rf-player-video[data-rotation='270'] {
+  width: 100vh;
+  width: 100dvh;
+  height: 100vw;
+  height: 100dvw;
+  max-width: 100vh;
+  max-width: 100dvh;
+  max-height: 100vw;
+  max-height: 100dvw;
+  object-fit: contain;
+}
+
+.rf-player-container:fullscreen .rf-player-video[data-rotation='90'],
+.rf-player-container:-webkit-full-screen .rf-player-video[data-rotation='90'] {
+  transform: rotate(90deg);
+}
+
+.rf-player-container:fullscreen .rf-player-video[data-rotation='270'],
+.rf-player-container:-webkit-full-screen .rf-player-video[data-rotation='270'] {
+  transform: rotate(270deg);
+}
+
+.rf-player-container:fullscreen .rf-player-video[data-rotation='180'],
+.rf-player-container:-webkit-full-screen .rf-player-video[data-rotation='180'] {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  transform: rotate(180deg);
+  object-fit: contain;
+}
+
+.rf-player-container:fullscreen .rf-player-video[data-rotation='0'],
+.rf-player-container:-webkit-full-screen .rf-player-video[data-rotation='0'] {
+  width: 100%;
+  height: 100%;
+  transform: none;
+  object-fit: contain;
+}
+
+/* Controls stay upright above the rotated video */
+.rf-player-container:fullscreen .rf-player-controls,
+.rf-player-container:-webkit-full-screen .rf-player-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+}
+
+/* ============ INTERACTIVE PSEUDO-FULLSCREEN BACKUP ============ */
+.rf-player-container.rf-pseudo-fullscreen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: none !important;
+  max-height: none !important;
+  z-index: 99999 !important;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.rf-player-container.rf-pseudo-fullscreen .rf-player-stage {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.rf-player-container.rf-pseudo-fullscreen .rf-player-controls {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+}
+
+/* Rotate video in pseudo-fullscreen */
+.rf-player-container.rf-pseudo-fullscreen .rf-player-video[data-rotation='90'],
+.rf-player-container.rf-pseudo-fullscreen .rf-player-video[data-rotation='270'] {
+  width: 100vh !important;
+  width: 100dvh !important;
+  height: 100vw !important;
+  height: 100dvw !important;
+  max-width: 100vh !important;
+  max-width: 100dvh !important;
+  max-height: 100vw !important;
+  max-height: 100dvw !important;
+  object-fit: contain;
+}
+
+.rf-player-container.rf-pseudo-fullscreen .rf-player-video[data-rotation='90'] {
+  transform: rotate(90deg);
+}
+
+.rf-player-container.rf-pseudo-fullscreen .rf-player-video[data-rotation='270'] {
+  transform: rotate(270deg);
+}
+
+.rf-player-container.rf-pseudo-fullscreen .rf-player-video[data-rotation='180'] {
+  width: 100% !important;
+  height: 100% !important;
+  transform: rotate(180deg);
+  object-fit: contain;
+}
+
+.rf-player-container.rf-pseudo-fullscreen .rf-player-video[data-rotation='0'] {
+  width: 100% !important;
+  height: 100% !important;
+  transform: none;
+  object-fit: contain;
+}
+
+/* ============ ROTATING SUBTITLES LAYOUT ============ */
+.rf-player-subtitles-wrapper {
+  transform-origin: center center;
+  transition: transform 0.28s ease, width 0.28s ease, height 0.28s ease;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Fullscreen / Pseudo-fullscreen subtitles sizing for 90° / 270° orientation swaps */
+.rf-player-container:fullscreen .rf-player-subtitles-wrapper[data-rotation='90'],
+.rf-player-container:fullscreen .rf-player-subtitles-wrapper[data-rotation='270'],
+.rf-player-container:-webkit-full-screen .rf-player-subtitles-wrapper[data-rotation='90'],
+.rf-player-container:-webkit-full-screen .rf-player-subtitles-wrapper[data-rotation='270'],
+.rf-player-container.rf-pseudo-fullscreen .rf-player-subtitles-wrapper[data-rotation='90'],
+.rf-player-container.rf-pseudo-fullscreen .rf-player-subtitles-wrapper[data-rotation='270'] {
+  width: 100vh !important;
+  width: 100dvh !important;
+  height: 100vw !important;
+  height: 100dvw !important;
+  max-width: 100vh !important;
+  max-width: 100dvh !important;
+  max-height: 100vw !important;
+  max-height: 100dvw !important;
+}
+
+.rf-player-container:fullscreen .rf-player-subtitles-wrapper[data-rotation='90'],
+.rf-player-container:-webkit-full-screen .rf-player-subtitles-wrapper[data-rotation='90'],
+.rf-player-container.rf-pseudo-fullscreen .rf-player-subtitles-wrapper[data-rotation='90'] {
+  transform: rotate(90deg);
+}
+
+.rf-player-container:fullscreen .rf-player-subtitles-wrapper[data-rotation='270'],
+.rf-player-container:-webkit-full-screen .rf-player-subtitles-wrapper[data-rotation='270'],
+.rf-player-container.rf-pseudo-fullscreen .rf-player-subtitles-wrapper[data-rotation='270'] {
+  transform: rotate(270deg);
+}
+
+.rf-player-container:fullscreen .rf-player-subtitles-wrapper[data-rotation='180'],
+.rf-player-container:-webkit-full-screen .rf-player-subtitles-wrapper[data-rotation='180'],
+.rf-player-container.rf-pseudo-fullscreen .rf-player-subtitles-wrapper[data-rotation='180'] {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  transform: rotate(180deg);
+}
+
+.rf-player-container:fullscreen .rf-player-subtitles-wrapper[data-rotation='0'],
+.rf-player-container:-webkit-full-screen .rf-player-subtitles-wrapper[data-rotation='0'],
+.rf-player-container.rf-pseudo-fullscreen .rf-player-subtitles-wrapper[data-rotation='0'] {
+  width: 100% !important;
+  height: 100% !important;
+  transform: none;
+}

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Primary Meta -->
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Runflix Entertainment" />
+
+  <!-- DYNAMIC_SEO_START -->
+  <!-- Title -->
+  <title>Runflix Entertainment — Movies & TV Series Downloads</title>
+
+  <!-- SEO -->
+  <meta name="description"
+    content="Discover trending movies and TV series, explore detailed information, browse seasons and episodes, and download content in multiple qualities with subtitle support." />
+
+  <meta name="keywords"
+    content="movies, tv series, downloads, streaming, entertainment, cinema, subtitles, HD movies, Runflix Entertainment, movie download, series download, anime, anime download, anime streaming, naruto, one piece, dragon ball, attack on titan, demon slayer, jujutsu kaisen, anime movies, anime series" />
+
+  <meta name="author" content="Runflix Entertainment" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Runflix Entertainment — Movies & TV Series Downloads" />
+  <meta property="og:description"
+    content="Browse trending movies and TV shows with cinematic details, episode downloads, subtitle support, and fast search." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://runflix.name.ng/og-image.png" />
+  <meta property="og:image:secure_url" content="https://runflix.name.ng/og-image.png" />
+  <meta property="og:image:alt" content="Runflix Entertainment — Movies & TV Series" />
+  <meta property="og:url" content="https://runflix.name.ng/" />
+  <meta property="og:site_name" content="Runflix Entertainment" />
+
+  <!-- Twitter -->
+  <meta name="twitter:title" content="Runflix Entertainment — Movies & TV Series Downloads" />
+  <meta name="twitter:description"
+    content="Explore trending movies and TV series with fast downloads and subtitle support." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://runflix.name.ng/og-image.png" />
+  <meta name="twitter:image:alt" content="Runflix Entertainment" />
+  <!-- DYNAMIC_SEO_END -->
+
+  <!-- PWA -->
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="shortcut icon" href="/favicon.ico" />
+
+  <!-- Preconnect / DNS Prefetch -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://wsrv.nl" />
+  <link rel="preconnect" href="https://pbcdnw.aoneroom.com" />
+  <link rel="dns-prefetch" href="https://wsrv.nl" />
+  <link rel="dns-prefetch" href="https://pbcdnw.aoneroom.com" />
+
+  <!-- Fonts -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <!-- Google Search Console Logo & WebSite Schema (JSON-LD) -->
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://runflix.name.ng/#organization",
+        "name": "Runflix Entertainment",
+        "url": "https://runflix.name.ng/",
+        "logo": "https://runflix.name.ng/logo.png",
+        "sameAs": [
+          "https://github.com/DaraTech-crtrl"
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+234-810-078-5677",
+          "contactType": "customer service",
+          "email": "daratech.web@gmail.com"
+        }
+      }
+    </script>
+  <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://runflix.name.ng/#website",
+        "name": "Runflix Entertainment",
+        "url": "https://runflix.name.ng/",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://runflix.name.ng/search?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+</head>
+
+<body class="bg-black text-white antialiased">
+  <div id="root"></div>
+
+  <script type="module" src="/src/main.tsx"></script>
+
+  <!-- PWA Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').catch(() => { });
+      });
+    }
+  </script>
+</body>
+
+</html>

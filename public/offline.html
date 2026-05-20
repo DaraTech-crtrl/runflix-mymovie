@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#030305" />
+  <title>Runflix Entertainment — Offline</title>
+  <style>
+    :root {
+      --rf-red: #e50914;
+      --rf-bg: #030305;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--rf-bg);
+      color: #f5f5f7;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Ambient background glow */
+    .bg-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 60vw;
+      height: 60vw;
+      max-width: 500px;
+      max-height: 500px;
+      background: var(--rf-red);
+      filter: blur(120px);
+      opacity: 0.12;
+      z-index: 0;
+      pointer-events: none;
+      border-radius: 50%;
+    }
+
+    /* Glassmorphic card */
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      background: rgba(20, 20, 25, 0.4);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 32px;
+      padding: 3rem 2rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .logo {
+      height: 28px;
+      margin-bottom: 2.5rem;
+      opacity: 0.95;
+    }
+
+    /* Animated Wifi off icon wrapper */
+    .icon-wrapper {
+      width: 72px;
+      height: 72px;
+      background: rgba(229, 9, 20, 0.1);
+      border: 1px solid rgba(229, 9, 20, 0.2);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 8px 32px rgba(229, 9, 20, 0.15);
+    }
+
+    .icon-wrapper svg {
+      width: 32px;
+      height: 32px;
+      stroke: var(--rf-red);
+    }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.5rem;
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    p {
+      margin: 0 0 2rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    button {
+      padding: 1rem 1.5rem;
+      width: 100%;
+      border: none;
+      border-radius: 16px;
+      background: var(--rf-red);
+      color: #fff;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 20px 0 rgba(229, 9, 20, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    button:hover {
+      background: #f40612;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px 0 rgba(229, 9, 20, 0.5);
+    }
+
+    button:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px 0 rgba(229, 9, 20, 0.3);
+    }
+
+    button svg {
+      width: 18px;
+      height: 18px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-glow"></div>
+  <div class="container">
+    <img src="/logo.png" alt="Runflix Entertainment" class="logo" />
+
+    <div class="icon-wrapper">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="2" y1="2" x2="22" y2="22"></line>
+        <path d="M8.53 8.53C5.58 9.39 3 11 1 13.5"></path>
+        <path d="M16 11.5C18.23 10 21 11 23 13.5"></path>
+        <path d="M5 5.5C8 3 11.5 2.5 15 3.5"></path>
+        <line x1="12" y1="20" x2="12.01" y2="20"></line>
+      </svg>
+    </div>
+
+    <h1>No Internet Connection</h1>
+    <p>It looks like you're offline. Please check your network connection and try again.</p>
+
+    <button type="button" onclick="location.reload()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="23 4 23 10 17 10"></polyline>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+      </svg>
+      Retry Connection
+    </button>
+  </div>
+  <script>
+    window.addEventListener('online', () => {
+      const btn = document.querySelector('button');
+      if (btn) {
+        btn.innerHTML = 'Reconnecting...';
+        btn.style.opacity = '0.7';
+        btn.style.pointerEvents = 'none';
+      }
+      // Reload automatically when the browser detects connection restoration
+      setTimeout(() => location.reload(), 500);
+    });
+  </script>
+</body>
+
+</html>

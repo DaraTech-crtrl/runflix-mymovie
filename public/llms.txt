@@ -1,0 +1,19 @@
+# Runflix Entertainment
+
+> A modern movie, TV series, and anime discovery platform.
+
+## About
+Runflix Entertainment is a content discovery and streaming aggregation platform built with React, Vite, TailwindCSS, and the GiftedTech Movies API.
+
+## Features
+- Movie and TV series discovery
+- Trending content browsing
+- Real-time search with pagination
+- Detailed movie and series information
+- Episode and season exploration
+- Multi-quality downloads with subtitles
+
+## Legal
+- [Terms of Service](https://runflix.name.ng/terms)
+- [Privacy Policy](https://runflix.name.ng/privacy)
+- [DMCA](https://runflix.name.ng/dmca)

@@ -1,0 +1,10 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Allow: /
+
+# Disallow private admin routes
+Disallow: /daratech
+Disallow: /admin
+
+# Sitemap location
+Sitemap: https://runflix.name.ng/sitemap.xml

@@ -1,0 +1,14 @@
+{
+  "totalPageviews": 0,
+  "todayPageviews": 0,
+  "todayDate": "",
+  "uniqueVisitorsToday": 0,
+  "activeLast5Min": 0,
+  "domains": {
+    "main": { "pageviews": 0, "uniqueToday": 0 },
+    "subdomain": { "pageviews": 0, "uniqueToday": 0 }
+  },
+  "topPages": [],
+  "recentPageviews": [],
+  "updatedAt": 0
+}
